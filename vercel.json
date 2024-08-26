@@ -2,9 +2,10 @@
   "version": 2,
   "builds": [
     {
-      "src": "public/server.js",
+      "src": "public/server.ts",
       "use": "@vercel/node",
       "config": {
+        "includeFiles": "src/**/*",
         "installCommand": "npm install && npm run build"
       }
     }
