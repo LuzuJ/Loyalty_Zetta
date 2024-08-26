@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Qualification {
+  id                          Int      @id @default(autoincrement())
+  donationId                  String
+  donatorId                   String
+  organizationId              String
+  qualityCalificationId       Int      @unique
+  timeCalificationId          Int      @unique
+  packagingCalificationId     Int      @unique
+  communicationCalificationId Int      @unique
+  generalScore                Float
+  notes                       String
+  createdAt                   DateTime @default(now())
+  updatedAt                   DateTime @updatedAt
+
+  qualityCalification       QualityCalification?       @relation("QualityCalification", fields: [qualityCalificationId], references: [id])
+  timeCalification          TimeCalification?          @relation("TimeCalification", fields: [timeCalificationId], references: [id])
+  packagingCalification     PackagingCalification?     @relation("PackagingCalification", fields: [packagingCalificationId], references: [id])
+  communicationCalification CommunicationCalification? @relation("CommunicationCalification", fields: [communicationCalificationId], references: [id])
+}
+
+model QualityCalification {
+  id            Int            @id @default(autoincrement())
+  score         Int
+  comments      String
+  qualification Qualification? @relation("QualityCalification")
+}
+
+model TimeCalification {
+  id            Int            @id @default(autoincrement())
+  score         Int
+  comments      String
+  qualification Qualification? @relation("TimeCalification")
+}
+
+model PackagingCalification {
+  id            Int            @id @default(autoincrement())
+  score         Int
+  comments      String
+  qualification Qualification? @relation("PackagingCalification")
+}
+
+model CommunicationCalification {
+  id            Int            @id @default(autoincrement())
+  score         Int
+  comments      String
+  qualification Qualification? @relation("CommunicationCalification")
+}
