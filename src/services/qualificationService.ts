@@ -125,5 +125,11 @@ export const deleteQualification = async (id: number) => {
 
   return await prisma.qualification.delete({
     where: { id },
+      include: {
+        qualityCalification: true,
+        timeCalification: true,
+        packagingCalification: true,
+        communicationCalification: true,
+      },
   });
 };

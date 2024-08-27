@@ -196,7 +196,7 @@ export const deleteQualification = async (req: IncomingMessage, res: ServerRespo
     res.end(JSON.stringify({
       status: 200,
       message: 'Eliminación exitosa',
-      response: { id: parsedId },
+      response: deletedQualification,
     }));
   } catch (error: any) {
     res.statusCode = 500;
