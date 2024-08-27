@@ -5,15 +5,14 @@
       "src": "public/server.ts",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": "src/**/*",
-        "installCommand": "npm install && npm run build"
+        "includeFiles": "src/**/*.ts"
       }
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/public/server.js"
+      "dest": "/public/server.ts"
     }
   ]
 }
