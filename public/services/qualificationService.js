@@ -125,6 +125,12 @@ const deleteQualification = (id) => __awaiter(void 0, void 0, void 0, function* 
     }
     return yield prismaClient_1.default.qualification.delete({
         where: { id },
+        include: {
+            qualityCalification: true,
+            timeCalification: true,
+            packagingCalification: true,
+            communicationCalification: true,
+        },
     });
 });
 exports.deleteQualification = deleteQualification;

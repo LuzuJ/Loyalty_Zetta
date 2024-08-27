@@ -198,7 +198,7 @@ const deleteQualification = (req, res) => __awaiter(void 0, void 0, void 0, func
         res.end(JSON.stringify({
             status: 200,
             message: 'Eliminación exitosa',
-            response: { id: parsedId },
+            response: deletedQualification,
         }));
     }
     catch (error) {
