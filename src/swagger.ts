@@ -20,7 +20,7 @@ const swaggerOptions = {
       }
     ],
   },
-  apis: ['./src/routes/qualificationRoutes.ts'], // Ruta a tus archivos de rutas
+  apis: ['./src/routes/*.ts'], // Ruta a tus archivos de rutas
 };
 
 const specs = swaggerJsdoc(swaggerOptions);
