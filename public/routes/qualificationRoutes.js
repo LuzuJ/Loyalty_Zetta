@@ -1,38 +1,143 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.handleQualificationsRoute = void 0;
+// src/routes/qualificationRoutes.ts
+const express_1 = __importDefault(require("express"));
 const qualificationController_1 = require("../controllers/qualificationController");
 const qualificationValidator_1 = require("../validators/qualificationValidator");
-const handleQualificationsRoute = (req, res) => {
-    const { method, url } = req;
-    if (method === 'GET' && url === '/api/qualificationsIDs') {
-        return (0, qualificationController_1.getQualificationsIDs)(req, res);
-    }
-    if (method === 'GET' && (url === null || url === void 0 ? void 0 : url.startsWith('/api/qualifications/'))) {
-        const id = url.split('/').pop();
-        if (id) {
-            return (0, qualificationController_1.getQualificationsByID)(req, res);
-        }
-    }
-    if (method === 'GET' && url === '/api/qualificationsAll/') {
-        return (0, qualificationController_1.getAllQualifications)(req, res);
-    }
-    if (method === 'POST' && url === '/api/qualifications') {
-        return (0, qualificationValidator_1.validateCreate)(req, res, () => (0, qualificationController_1.createQualifications)(req, res));
-    }
-    if (method === 'PUT' && (url === null || url === void 0 ? void 0 : url.startsWith('/api/qualifications/'))) {
-        const id = url.split('/').pop();
-        if (id) {
-            return (0, qualificationValidator_1.validateCreate)(req, res, () => (0, qualificationController_1.updateQualifications)(req, res));
-        }
-    }
-    if (method === 'DELETE' && (url === null || url === void 0 ? void 0 : url.startsWith('/api/qualifications/'))) {
-        const id = url.split('/').pop();
-        if (id) {
-            return (0, qualificationController_1.deleteQualification)(req, res);
-        }
-    }
-    res.statusCode = 404;
-    res.end(JSON.stringify({ status: res.status, message: 'Solicitud Incorrecta' }));
-};
-exports.handleQualificationsRoute = handleQualificationsRoute;
+const router = express_1.default.Router();
+/**
+ * @swagger
+ * tags:
+ *   name: Qualifications
+ *   description: Operaciones relacionadas con calificaciones
+ */
+/**
+ * @swagger
+ * /api/qualificationsIDs:
+ *   get:
+ *     summary: Obtiene todos los IDs de calificaciones
+ *     tags: [Qualifications]
+ *     responses:
+ *       200:
+ *         description: Lista de IDs de calificaciones
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: string
+ */
+router.get('/qualificationsIDs', qualificationController_1.getQualificationsIDs);
+/**
+ * @swagger
+ * /api/qualifications/{id}:
+ *   get:
+ *     summary: Obtiene una calificación por ID
+ *     tags: [Qualifications]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID de la calificación
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Información de la calificación
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: string
+ *                 score:
+ *                   type: integer
+ */
+router.get('/qualifications/:id', qualificationController_1.getQualificationsByID);
+/**
+ * @swagger
+ * /api/qualificationsAll:
+ *   get:
+ *     summary: Obtiene todas las calificaciones
+ *     tags: [Qualifications]
+ *     responses:
+ *       200:
+ *         description: Lista de calificaciones
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ */
+router.get('/qualificationsAll', qualificationController_1.getAllQualifications);
+/**
+ * @swagger
+ * /api/qualifications:
+ *   post:
+ *     summary: Crea una nueva calificación
+ *     tags: [Qualifications]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               score:
+ *                 type: integer
+ *     responses:
+ *       201:
+ *         description: Calificación creada
+ */
+router.post('/qualifications', qualificationValidator_1.validateCreate, qualificationController_1.createQualifications);
+/**
+ * @swagger
+ * /api/qualifications/{id}:
+ *   put:
+ *     summary: Actualiza una calificación existente
+ *     tags: [Qualifications]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID de la calificación
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               score:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Calificación actualizada
+ */
+router.put('/qualifications/:id', qualificationValidator_1.validateCreate, qualificationController_1.updateQualifications);
+/**
+ * @swagger
+ * /api/qualifications/{id}:
+ *   delete:
+ *     summary: Elimina una calificación por ID
+ *     tags: [Qualifications]
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         description: ID de la calificación
+ *         schema:
+ *           type: string
+ *     responses:
+ *       204:
+ *         description: Calificación eliminada
+ */
+router.delete('/qualifications/:id', qualificationController_1.deleteQualification);
+exports.default = router;
