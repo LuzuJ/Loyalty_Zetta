@@ -23,7 +23,7 @@ const swaggerOptions = {
                 description: 'Servidor local'
             },
             {
-                url: 'https://loyalty-zetta.vercel.app/api-docs/',
+                url: 'https://loyalty-zetta.vercel.app',
                 description: 'Server desplegado en vercel'
             }
         ],
