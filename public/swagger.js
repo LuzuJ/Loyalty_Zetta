@@ -28,7 +28,7 @@ const swaggerOptions = {
             }
         ],
     },
-    apis: ['./src/routes/*.ts'], // Ruta a tus archivos de rutas
+    apis: ['./public/routes/*.js'], // Ruta a tus archivos de rutas
 };
 const specs = (0, swagger_jsdoc_1.default)(swaggerOptions);
 // Imprime la especificación generada para depuración
