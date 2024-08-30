@@ -1,6 +1,7 @@
 import swaggerJsdoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 import express from 'express';
+import path from 'path';
 
 const app = express();
 
@@ -35,4 +36,5 @@ console.log(JSON.stringify(specs, null, 2));
 // Middleware para servir la documentación Swagger
 export const setupSwagger = (app: express.Express) => {
   app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+  app.use('/static', express.static(path.join(__dirname, 'public')));
 };
