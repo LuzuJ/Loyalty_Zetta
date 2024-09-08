@@ -12,15 +12,15 @@
   "routes": [
     {
       "src": "/api-docs",
-      "dest": "/src/server.ts"
+      "dest": "/public/server.js"
     },
     {
       "src": "/api-docs/(.*)",
-      "dest": "/src/server.ts"
+      "dest": "/public/server.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/src/server.ts"
+      "dest": "/public/server.js"
     }
   ]
 }
