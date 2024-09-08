@@ -25,7 +25,7 @@ const swaggerOptions = {
       }
     ],
   },
-  apis: ['./src/routes/*.ts'], // Ruta a tus archivos de rutas
+  apis: ['./public/routes/*.js'], // Ruta a tus archivos de rutas
 };
 
 const specs = swaggerJsdoc(swaggerOptions);
