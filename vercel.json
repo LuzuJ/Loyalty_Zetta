@@ -11,8 +11,16 @@
   ],
   "routes": [
     {
+      "src": "/api-docs",
+      "dest": "/src/server.ts"
+    },
+    {
+      "src": "/api-docs/(.*)",
+      "dest": "/src/server.ts"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/public/server.js"
+      "dest": "/src/server.ts"
     }
   ]
 }
